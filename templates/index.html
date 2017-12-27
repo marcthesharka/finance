@@ -1,0 +1,41 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Index
+{% endblock %}
+
+{% block main %}
+<table style="width:100%" class="table table-striped">
+  <thead>
+    <tr>
+        <th>Name</th>
+        <th>Shares</th>
+        <th>Current Price</th>
+        <th>Holding Value</th>
+    </tr>
+  </thead>
+  <tfoot>
+      <tr>
+        <td colspan="3"></td>
+          <td><b>{{ "$%.2f"|format(totalholdingval) }}</b></td>
+      </tr>
+  </tfoot>
+  {% for row in indexdict %}
+  {% if row.shares != 0 %}
+  <tr>
+        <td>{{ row.symbol }}</td>
+        <td>{{ row.shares }}</td>
+        <td>{{ "$%.2f"|format(row.price) }}</td>
+        <td>{{ "$%.2f"|format(row.totalval) }}</td>
+  </tr>
+  {% endif %}
+  {% endfor %}
+  <tr>
+    <td>CASH</td>
+      <td></td>
+      <td></td>
+      <td>{{ "$%.2f"|format(cashbalance) }}</td>
+
+  </tr>
+</table>
+{% endblock %}
